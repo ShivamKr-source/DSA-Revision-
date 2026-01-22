@@ -1,0 +1,53 @@
+1.Sliding window : 
+
+Aspect	Fixed Window	Variable Window
+Window size	Constant (k)	Changes
+Shrink condition	When size == k	When condition breaks
+Use case	“Size k”	“Longest / shortest”
+Loop	Single for	for + while
+
+
+Fixed window:
+
+int n = arr.length;
+int k = 3;
+
+int left = 0;
+int windowSum = 0;
+int maxSum = Integer.MIN_VALUE;
+
+for (int right = 0; right < n; right++) {
+
+    // expand window
+    windowSum += arr[right];
+
+    // once window size hits k
+    if (right - left + 1 == k) {
+        maxSum = Math.max(maxSum, windowSum);
+
+        // shrink window
+        windowSum -= arr[left];
+        left++;
+    }
+}
+
+Dynamic window:
+
+int left = 0;
+int sum = 0;
+int maxLen = 0;
+
+for (int right = 0; right < arr.length; right++) {
+
+    sum += arr[right];
+
+    // shrink window if condition breaks
+    while (sum > target) {
+        sum -= arr[left];
+        left++;
+    }
+
+    // valid window
+    maxLen = Math.max(maxLen, right - left + 1);
+}
+
