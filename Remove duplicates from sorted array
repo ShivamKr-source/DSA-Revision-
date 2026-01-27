@@ -1,0 +1,35 @@
+Given an integer array nums sorted in non-decreasing order, remove the duplicates in-place such that each unique element appears only once. The relative order of the elements should be kept the same.
+Consider the number of unique elements in nums to be k​​​​​​​​​​​​​​. After removing duplicates, return the number of unique elements k.
+The first k elements of nums should contain the unique numbers in sorted order. The remaining elements beyond index k - 1 can be ignored.
+
+
+class Solution {
+    public int removeDuplicates(int[] arr) {
+
+       // Pointer/index for placing the next unique element
+       // k will always represent the last unique element position
+       int k = 0;
+
+       // Edge case: if array is null, no elements exist
+       if(arr == null) return 0;
+
+       // Traverse array until second last element
+       // We compare each element with the next one
+       for(int i = 0; i < arr.length - 1; i++){
+
+           // If current element is NOT equal to next element,
+           // it means arr[i+1] is a new unique value
+           if(arr[i] != arr[i+1]){
+
+               // Move k forward to store the new unique element
+               k++;
+
+               // Place the unique element at index k
+               arr[k] = arr[i+1];
+           }
+       }
+
+       // Since k is an index, number of unique elements = k + 1
+       return k + 1;
+    }
+}

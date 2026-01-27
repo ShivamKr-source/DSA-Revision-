@@ -1,0 +1,34 @@
+Problem Statement: Remove Element (In-Place)
+You are given an integer array nums and an integer val.
+Remove all occurrences of val in-place and return the number of elements that are not equal to val.
+
+Requirements
+1.Modify nums in-place.
+2.Return k, the count of remaining elements.
+3.The first k elements of nums should contain the result.
+4.Extra space must be O(1).
+
+class Solution {
+
+    // Removes all occurrences of 'val' from the array in-place
+    // Returns the count of elements not equal to 'val'
+    // Time Complexity: O(n)
+    // Space Complexity: O(1)
+    public int removeElement(int[] nums, int val) {
+
+        int k = 0; // index to place the next valid (non-val) element
+
+        // Traverse the array
+        for (int i = 0; i < nums.length; i++) {
+
+            // If current element is valid, move it to index k
+            if (nums[i] != val) {
+                nums[k] = nums[i];
+                k++; // increment count of valid elements
+            }
+        }
+
+        // First k elements of nums contain the result
+        return k;
+    }
+}
