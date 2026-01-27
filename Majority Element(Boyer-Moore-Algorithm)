@@ -1,0 +1,43 @@
+Given an array nums of size n, return the majority element.
+The majority element is the element that appears more than ⌊n / 2⌋ times. You may assume that the majority element always exists in the array.
+
+Constraints:
+n == nums.length
+1 <= n <= 5 * 104
+-109 <= nums[i] <= 109
+The input is generated such that a majority element will exist in the array.
+solve the problem in linear time and in O(1) space? 
+
+
+class Solution {
+    public int majorityElement(int[] nums) {
+
+        // BOYER–MOORE VOTING ALGORITHM
+        // This algorithm finds the majority element in O(n) time and O(1) space.
+        // Assumption: A majority element (appearing more than n/2 times) always exists.
+
+        int candidate = 0;  // Stores the current candidate for majority element
+        int count = 0;      // Vote counter for the candidate
+
+        // Single pass through the array
+        for (int num : nums) {
+
+            // If count is zero, select the current element as new candidate
+            if (count == 0) {
+                candidate = num;
+            }
+
+            // If current element supports the candidate, increment count
+            // Otherwise, decrement count (pairwise cancellation)
+            if (num == candidate) {
+                count++;
+            } else {
+                count--;
+            }
+        }
+
+        // Since the problem guarantees the existence of a majority element,
+        // the final candidate is the majority element
+        return candidate;
+    }
+}
